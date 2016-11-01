@@ -21,12 +21,13 @@ def start_input():
         date = input()
         try:
             date = datetime.strptime(date, START)
-            if not(today_check(date)):
-                print("Today only %s!" % TODAY.strftime(START))
-                continue
-            break
         except ValueError:
             print("{YYYY}.{MM}.{DD}")
+            continue
+        if not(today_check(date)):
+            print("Today only %s!" % TODAY.strftime(START))
+            continue
+        break
     return date
 
 
@@ -36,17 +37,15 @@ def period_input(start):
         period = input()
         try:
             period = int(period)
-            if (period >= MAX_PER):
-                print("Too long!")
-                continue
-            finish = start+timedelta(days=period)
-            if not(today_check(finish)):
-                print("Finish %s is out of range!" % finish.strftime(START))
-                continue
-            break
         except ValueError:
             print("Only numbers!")
+            continue
+        if (period > MAX_PER or period <= 0):
+            print("Range: 1..365!")
+            continue
+        finish = start+timedelta(days=period-1)
+        if not(today_check(finish)):
+            print("Finish %s is out of range!" % finish.strftime(START))
+            continue
+        break
     return period
-
-
-period_input(start_input())
