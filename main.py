@@ -4,6 +4,7 @@ import input
 import bps
 import nbank
 
+
 if __name__ == '__main__':
     start = input.start_input()
     period = input.period_input(start)

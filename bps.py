@@ -9,13 +9,25 @@ BPS = "http://www.bps-sberbank.by/43257f17004e948d/dm_rates?open"
 
 
 class DailyData():
-    _pattern = {'buy': [], 'sale': []}
+    def __init__(self, list):
+        self.au = dict(buy=list[0:2], sale=list[2:4])
+        self.ag = dict(buy=list[4:6], sale=list[6:8])
+        self.pt = dict(buy=list[8:10], sale=list[10:12])
+        self.pd = dict(buy=list[12:14], sale=list[14:16])
 
-    def __init__(self, arg):
-        self.arg = arg
+    def __newstr(self, arg):
+        return(''.join([
+            "{0}     {1}".format(*arg['buy']),
+            "        ",
+            "{0}     {1}".format(*arg['sale'])]))
 
     def __str__(self):
-        return str(self.arg)
+        return (''.join([
+            "               Buy:                    Sale:"
+            "\nGold           ", self.__newstr(self.au),
+            "\nSilver         ", self.__newstr(self.ag),
+            "\nPlatinum       ", self.__newstr(self.pt),
+            "\nPalladium      ", self.__newstr(self.pd)]))
 
 
 def start_check(start, period):

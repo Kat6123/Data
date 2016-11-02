@@ -16,7 +16,7 @@ class DailyData():
         self.rub = rub
 
     def __str__(self):
-        return("USD: %f     RUB: %f" % (self.usd, self.rub))
+        return ("USD: %f     RUB: %f" % (self.usd, self.rub))
 
 
 def start_check(start, period):
