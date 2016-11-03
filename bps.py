@@ -4,6 +4,7 @@ from re import compile
 from input import ONE
 from input import START
 from request import request
+from request import RError
 
 BPS = "http://www.bps-sberbank.by/43257f17004e948d/dm_rates?open"
 
@@ -34,10 +35,7 @@ def start_check(start, period):
     params = {'date': start.strftime(START)}
     r = request(BPS, params)
     if (parse(r.text) is None):
-        print('Not found. Try another start date:')
-        return False
-    else:
-        return True
+        raise RError('Not found. Try another start date:')
 
 
 def parse(html):

@@ -3,7 +3,7 @@
 from input import ONE
 from input import START
 from request import request
-from request import NBError
+from request import RError
 
 RUB = "http://www.nbrb.by/API/ExRates/Rates/298"
 USD = "http://www.nbrb.by/API/ExRates/Rates/145"
@@ -17,16 +17,6 @@ class DailyData():
 
     def __str__(self):
         return ("USD: %f     RUB: %f" % (self.usd, self.rub))
-
-
-def start_check(start, period):
-    params = {'onDate': start.strftime(START)}
-    try:
-        request(USD, params)
-        request(RUB, params)
-    except NBError as e:
-        print(e.message)
-        return False
 
 
 def get(resp):
